@@ -1,0 +1,45 @@
+                    // section.decoration {
+                    //     display: none;
+                    //     position: absolute;
+                    //     top: 0;
+                    //     z-index: -1000;
+                    //     width: 100%;
+                    //     height: 100%;
+                    //     overflow: hidden;
+                    //     background-repeat: no-repeat;
+                    //     @media screen and (min-width: 650px) {
+                    //         display: block;
+                    //         min-height: 1024px;
+                    //         height: 100%;
+                    //     }
+                    //     @media screen and (min-width: 650px) {
+                    //         min-height: 850px;
+                    //     }
+                    // }
+                    .background {
+                        position: absolute;
+                        top: 0;
+                        z-index: -1000;
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                    }
+                    
+                    .background .img-background {
+                        position: fixed;
+                        height: 100vh;
+                        width: 100vw;
+                    }
+                    
+                    @media (max-width: 1250px) {}
+                    
+                    @media (max-width: 980px) {
+                        .background .img-background {
+                            position: fixed;
+                            height: 130vh;
+                            width: auto;
+                        }
+                    }
