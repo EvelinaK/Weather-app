@@ -140,20 +140,14 @@ export default function WeatherCard({weather}) {
     boxShadow: 'none',
     textAlign: 'center',
     padding: theme.spacing(5, 0),
-    color: theme.palette.info.darker,
-    backgroundColor: theme.palette.info.lighter,
+    color: theme.palette.info.dark,
+    backgroundColor: theme.palette.info.light,
     transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
     backgroundImage: 'none',
     overflow: 'hidden',
     borderRadius: '16px',
     position: 'relative',
     zIndex: '0',
-    boxShadow: 'none',
-    textAlign: 'center',
-    padding: '35px 0px',
-    color: '#fff8e8',
-    backgroundColor: `${background}`,
-
 
 
     "& .MuiTypography-h3": {

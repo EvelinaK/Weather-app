@@ -18,8 +18,8 @@ export default function CardMediaComponent({ weather }) {
     let icon = initialIcon
 
     switch (Object.keys(weather).length !== 0 && weather?.weather[0].icon) {
+
       case '01d':
-          console.log(images[0].default)
         icon = images[0].default
         break
   
@@ -36,12 +36,10 @@ export default function CardMediaComponent({ weather }) {
         break
   
       case  '03n' ||  '04n':
-        console.log(images[0].default);
         icon = images[2].default
         break
 
         case '03d' ||  '04d':
-            console.log(images[0].default);
             icon = images[2].default
             break
   

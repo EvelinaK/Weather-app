@@ -10,12 +10,12 @@ export default function Decorator(props) {
 
     let background 
 
-    if(props.DayOrNigth == 'day'){
+    if(props.DayOrNigth === 'day'){
         background = dayBg
-    }else if(props.DayOrNigth == 'night'){
+    }else if(props.DayOrNigth === 'night'){
         background = nightBg
 
-    }else if(props.DayOrNigth == 'other'){
+    }else if(props.DayOrNigth === 'other'){
         background = day2Bg
     }else {
         background = day3Bg
