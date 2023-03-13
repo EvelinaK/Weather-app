@@ -1,28 +1,28 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link,NavLink, useRouteMatch, useLocation } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link, useRouteMatch, useLocation } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
-import actions from '../../redux/cities/city-actions';
+import actions from "../../redux/cities/city-actions";
 
-import citiesOperations from '../../redux/cities/city-operations';
+import citiesOperations from "../../redux/cities/city-operations";
 
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 // import CardMedia from '@material-ui/core/CardMedia';
 import CardMediaComponent from "../CardMedia/CardMedia";
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import { red } from '@material-ui/core/colors';
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import { red } from "@material-ui/core/colors";
 
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DeleteIcon from '@material-ui/icons/Delete';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export default function WeatherItem({ weather }) {
   const { url } = useRouteMatch();
@@ -35,7 +35,6 @@ export default function WeatherItem({ weather }) {
     setExpanded(!expanded);
   };
 
-  console.log(location);
   const removeCity = () => {
     dispatch(actions.deleteCity(weather.id));
   };
@@ -45,11 +44,11 @@ export default function WeatherItem({ weather }) {
   };
 
   window.onload = function () {
-    const loaded = sessionStorage.getItem('loaded');
+    const loaded = sessionStorage.getItem("loaded");
     if (loaded) {
       refresh();
     } else {
-      sessionStorage.setItem('loaded', true);
+      sessionStorage.setItem("loaded", true);
     }
   };
 
@@ -58,29 +57,31 @@ export default function WeatherItem({ weather }) {
       <Card className={classes.root}>
         <CardActionArea>
           <IconButton color="primary" onClick={() => refresh()}>
-            <RefreshIcon style={{ color: '#60a5fa' }} />
+            <RefreshIcon style={{ color: "#60a5fa" }} />
           </IconButton>
-   
-            <CardMediaComponent weather={weather}/>
 
-          <Link to={{pathname: `${url}/${weather.id}`, state: {from: location.pathname}}}>
-          <Button>Detail weather forecast</Button>             
+          <CardMediaComponent weather={weather} />
+
+          <Link
+            to={{
+              pathname: `${url}/${weather.id}`,
+              state: { from: location.pathname },
+            }}
+          >
+            <Button>Detail weather forecast</Button>
           </Link>
-           <CardContent className="Link-detail">
-              <h3> {weather.name}</h3>
-              <h3>{weather.sys.country}</h3>
-              <div className="location-box">
-                <div className="weather">{Math.round(weather.main.temp)}°c</div>
-                <div className="weather">
-                  feel like {Math.round(weather.main.feels_like)}°c
-                </div>
-                <div className="weather">
-                  wind speed {weather.wind.speed}m/s
-                </div>
-                <div className="weather">{weather.weather[0].description}</div>
+          <CardContent className="Link-detail">
+            <h3> {weather.name}</h3>
+            <h3>{weather.sys.country}</h3>
+            <div className="location-box">
+              <div className="weather">{Math.round(weather.main.temp)}°c</div>
+              <div className="weather">
+                feel like {Math.round(weather.main.feels_like)}°c
               </div>
-            </CardContent>
-      
+              <div className="weather">wind speed {weather.wind.speed}m/s</div>
+              <div className="weather">{weather.weather[0].description}</div>
+            </div>
+          </CardContent>
         </CardActionArea>
         <CardActions disableSpacing>
           <IconButton
@@ -113,15 +114,15 @@ export default function WeatherItem({ weather }) {
                 pressure {Math.round(weather.main.pressure)}hPa
               </div>
               <div className="temp">
-                sunrise{' '}
+                sunrise{" "}
                 {new Date(weather.sys.sunrise * 1000)
-                  .toLocaleTimeString('en-GB')
+                  .toLocaleTimeString("en-GB")
                   .slice(0, 5)}
               </div>
               <div className="temp">
-                sunset{' '}
+                sunset{" "}
                 {new Date(weather.sys.sunset * 1000)
-                  .toLocaleTimeString('en-GB')
+                  .toLocaleTimeString("en-GB")
                   .slice(0, 5)}
               </div>
             </Typography>
@@ -132,42 +133,38 @@ export default function WeatherItem({ weather }) {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 354,
     margin: 25,
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'rgba(255, 255, 255, 0.4);',
-    boxShadow: '3px 6px rgb(0 0 0 / 20%)',
-    textDecoration: 'none',
-    color: '#60a5fa',
-    fontSize: '30px',
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "rgba(255, 255, 255, 0.4);",
+    boxShadow: "3px 6px rgb(0 0 0 / 20%)",
+    textDecoration: "none",
+    color: "#60a5fa",
+    fontSize: "30px",
 
     "& .MuiButton-label a": {
-      color:'white',
-      textDecoration:'none',
+      color: "white",
+      textDecoration: "none",
     },
-
-   
-
-
   },
 
   media: {
     height: 0,
-    paddingTop: '30.9%',
-    backgroundSize: '25%',
+    paddingTop: "30.9%",
+    backgroundSize: "25%",
   },
 
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
   },
 }));

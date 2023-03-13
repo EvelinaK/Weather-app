@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import citiesOperations from '../redux/cities/city-operations';
-import * as citiesSelectors from '../redux/cities/city-selectors';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
-import WeatherChart from '../components/WeatherChart/WeaterChart';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
-import { v4 as uudv4 } from 'uuid';
-import './../index.css';
-import Decoration from '../components/Decorator/Decarator';
-let DayOrNigth='other';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import citiesOperations from "../redux/cities/city-operations";
+import * as citiesSelectors from "../redux/cities/city-selectors";
+import { useParams, useHistory, useLocation } from "react-router-dom";
+import WeatherChart from "../components/WeatherChart/WeaterChart";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+import { v4 as uudv4 } from "uuid";
+import "./../index.css";
+import Decoration from "../components/Decorator/Decarator";
+let DayOrNigth = "other";
 
 export default function DetailView() {
   const { weatherId } = useParams();
@@ -25,40 +25,38 @@ export default function DetailView() {
   const forecast = useSelector(citiesSelectors.getForecast);
 
   let weather;
-  console.log(location.state.from)
 
   useState(() => {
     switch (location.state.from) {
-      case '/search':
+      case "/search":
         dispatch(citiesOperations.fetchCityByID(weatherId));
         break;
-      case '/weatherList':
+      case "/weatherList":
         dispatch(citiesOperations.fetchCityByID(weatherId));
         break;
-      case '/':
+      case "/":
         dispatch(citiesOperations.renderCityByID(weatherId));
         break;
       default:
-        console.log('location.state.from not found');
     }
   });
 
   const weatherItem = useSelector(citiesSelectors.getItem);
-  const weatherFavourite = useSelector(state =>
-    citiesSelectors.getFavouriteCityByID(state, Number(weatherId)),
+  const weatherFavourite = useSelector((state) =>
+    citiesSelectors.getFavouriteCityByID(state, Number(weatherId))
   );
 
   switch (location.state.from) {
-    case '/weatherList':
+    case "/weatherList":
       weather = weatherFavourite.weather;
 
       break;
 
-    case '/search':
+    case "/search":
       weather = weatherItem;
 
       break;
-    case '/':
+    case "/":
       weather = weatherFavourite.weather;
 
       break;
@@ -74,7 +72,7 @@ export default function DetailView() {
         citiesOperations.fetchForecast({
           lat: lat.toFixed(2),
           lon: lon.toFixed(2),
-        }),
+        })
       );
     }
   }, [dispatch, weather]);
@@ -83,31 +81,30 @@ export default function DetailView() {
   if (forecast?.hourly) {
     hourlyTemp24 = forecast.hourly.slice(0, 24);
   }
-  console.log(hourlyTemp24);
 
-  const dateBuilder = d => {
+  const dateBuilder = (d) => {
     let months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
     let days = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
     ];
 
     let day = days[d.getDay()];
@@ -121,15 +118,15 @@ export default function DetailView() {
   const goBack = () => {
     if (location.state && location.state.from) {
       history.push(location.state.from);
-    } else history.push('/');
+    } else history.push("/");
   };
   const classes = useStyles();
   return (
     <>
-      <Decoration DayOrNigth={DayOrNigth} /> 
+      <Decoration DayOrNigth={DayOrNigth} />
       <div className="form-cont">
         <Button className={classes.button} onClick={goBack}>
-          <ArrowBackIcon style={{ color: 'white' }} />
+          <ArrowBackIcon style={{ color: "white" }} />
         </Button>
 
         {weather && weather.name && weather.sys.country && (
@@ -156,7 +153,7 @@ export default function DetailView() {
                   exit="exit"
                   key={uudv4()}
                 >
-                  <p style={{ color: '#60a5fa' }}>WEATHER</p>
+                  <p style={{ color: "#60a5fa" }}>WEATHER</p>
                   <WeatherChart chartData={hourlyTemp24} />
                 </motion.div>
               </AnimatePresence>
@@ -168,10 +165,10 @@ export default function DetailView() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
-    backgroundColor: '#60a5fa',
+    backgroundColor: "#60a5fa",
   },
 }));
 
@@ -187,7 +184,7 @@ export const Animate = {
     opacity: 1,
     transition: {
       duration: 1,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
   exit: {
@@ -196,7 +193,7 @@ export const Animate = {
     opacity: 0,
     transition: {
       duration: 1,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
