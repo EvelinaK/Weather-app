@@ -27,7 +27,7 @@ export default function DetailView() {
   let weather;
 
   useState(() => {
-    switch (location.state.from) {
+    switch (location?.state?.from) {
       case "/search":
         dispatch(citiesOperations.fetchCityByID(weatherId));
         break;
@@ -46,7 +46,7 @@ export default function DetailView() {
     citiesSelectors.getFavouriteCityByID(state, Number(weatherId))
   );
 
-  switch (location.state.from) {
+  switch (location?.state?.from) {
     case "/weatherList":
       weather = weatherFavourite.weather;
 
@@ -116,7 +116,7 @@ export default function DetailView() {
   };
 
   const goBack = () => {
-    if (location.state && location.state.from) {
+    if (location?.state && location?.state?.from) {
       history.push(location.state.from);
     } else history.push("/");
   };
